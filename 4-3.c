@@ -33,7 +33,7 @@ main()
             else/* code */
                 printf("error:zero divisor\n");
             break;
-        case '%'    
+        case '%':    
             op2=pop();
             if(op2!=0.0)
                 pish(fmod(pop(),op2));
