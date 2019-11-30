@@ -3,11 +3,11 @@
 
 #define MAXOP 100
 #define NUMBER '0'
-int gitop(char[]);
+int getop(char[]);
 void push(double);
 double pop(void);
 void clear(void);
-main()
+int main()
 {
     int type;
     double op1,op2;
