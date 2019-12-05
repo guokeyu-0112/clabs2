@@ -3,21 +3,21 @@
 char* reverse(char *x)
 {
     int len=strlen(x);
-    int i,n=len/2;
-    char tem;
-    for(i=0;i<=n;i++)
+    int i;
+    char c;
+    for(i=0;i<=len/2;i++)
     {
-        tem=x[i];
-        x[i]=x[len-1-i];
-        x[len-1-i]=tem;
+        c=x[i];
+        x[i]=x[len-i-1];
+        x[len-i-1]=c;
     }
     return x;
 }
 int main()
 {
-    char str[100];
+    char s[100];
     printf("input a string:");
-    gets(str);
-    puts(reverse(str));
+    gets(s);
+    puts(reverse(s));
     return 0;
-}
+} 
