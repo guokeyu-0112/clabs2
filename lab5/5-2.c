@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <ctype.h>
+#include <math.h>
 
 int getch(void);
 void ungetch(int);
