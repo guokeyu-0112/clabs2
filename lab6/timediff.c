@@ -28,10 +28,10 @@ int main()
     s1=sum(year1,month1,day1);
     s2=sum(year2,month2,day2);
     if(s1>s2)
-    printf("%d\n",s1-s2);
+    printf("%d\n",s1-s2+1);
     else
     {
-        printf("%d\n",s2-s1);
+        printf("%d\n",s2-s1+1);
     }
     
 }
