@@ -1,46 +1,74 @@
 #include <stdio.h>
 #include <ctype.h>
-#include <math.h>
-
-int getch(void);
-void ungetch(int);
-
+char buf[100];
+int bufp=0;
+int getch(void)
+{
+    return(bufp>0)?buf[--bufp]:getchar();
+}
+void ungetch(int c)
+{
+    if(bufp>=100)
+    printf("full");
+    else
+    {
+        buf[bufp++]=c;
+    }
+}
 int getfloat(float *pn)
 {
     int c,sign;
-    float power;
-
-    while(isspace(c=getch()))
-        ;
-    if(!isdigit(c)&&c!=EOF&&c!='+'&&c!='-'&&c!='.'){
+    float i;
+    while(isspace(c=getch())&&c!='\n')
+    ;
+    if(!isdigit(c)&&c!=EOF&&c!='+'&&c!='-'&&c!='.')
+    {
         ungetch(c);
         return 0;
     }
     sign=(c=='-')?-1:1;
     if(c=='+'||c=='-')
-        c=getch();
-    for(*pn=0.0;isdigit(c);c=getch())
-        *pn=10.0**pn+(c-'0');
-    if(c=='.')
-        c=getch();
-    for(power=1.0;isdigit(c);c=getch()){
-        *pn=10.0**pn+(c='0');
-        power*=10.0;
+    c=getch();
+    int flag=0;
+    for(*pn=0.0,i=1;isdigit(c)||c=='.';c=getch())
+    {
+        if(c=='.')
+        flag=1;
+        else if(flag==1)
+        {
+            i*=0.1;
+            *pn=*pn+(c-'0')*i;
+        }
+        else if(isdigit(c))
+        *pn=10.0* *pn+(c-'0');
     }
-    *pn*=sign/power;
-    if(c!=EOF)
+    *pn *=sign;
+    if(c!='\n')
+    ungetch(c);
+    else
+    {
         ungetch(c);
-    return c;
+    }
+    return *pn;
 }
 int main()
 {
-    float x[100];
-    float sum=0.0;
-    printf("input several float\n");
-    int i;
-    for(i=0;i<=99;i++)
-    scanf("%f",&x[i]);
-    sum=sum+x[i];
-    return sum;
-    printf("the sum is:%f\n",sum);
+    float a[100];
+    int n=0;
+    int i=0;
+    float sum=0;
+    for(i=0;i<100;i++)
+    {
+        getfloat(&a[i]);
+        if(a[i]!='\0')
+        {
+            n++;
+            sum+=a[i];
+        }
+        else
+        {
+            break;
+        }  
+    }
+    printf("%g\n",sum);
 }
