@@ -3,18 +3,19 @@
 int main(int argc,char *argv[])
 {
     double a[100];
-    int i=0;
-    a[0]=atof(argv[1]);
-    a[1]=atof(argv[2]);
-    a[2]=atof(argv[3]);
-    a[3]=atof(argv[4]);
-    a[4]=atof(argv[5]);
-    a[5]=atof(argv[6]);
-    double min=a[0];
-    for(i=0;i<6;i++){
-        if(min>a[i]){
-            min=a[i];
+    int i=1,j=0,x=0;
+    double temp;
+    for(i=1;i<argc;i++,j++){
+        a[j]=atof(argv[i]);
+    }
+    for(x=0;x<argc-2;x++){
+        if(a[x]<a[x+1])
+        {
+            temp=a[x];
+            a[x]=a[x+1];
+            a[x+1]=temp;
         }
     }
-    printf("%.2f\n",min);
+    printf("the min is:%g\n",a[argc-2]);
+    return 0;
 }
